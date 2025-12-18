@@ -56,15 +56,15 @@ environment. Follow the official
 
 ### Initialization
 
-The first step is to initialize the workspace folder (`my-workspace`) where
-the `example-application` and all Zephyr modules will be cloned. Run the following
+The first step is to initialize the workspace folder (`zephyr-workspace`) where
+the `zephyr-flake-starter` and all Zephyr modules will be cloned. Run the following
 command:
 
 ```shell
-# initialize my-workspace for the example-application (main branch)
-nix-shell -p python312Packages.west --run "west init -m https://github.com/PleahMaCaka/zephyr-flake-starter --mr main my-workspace"
+# initialize zephyr-workspace for the zephyr-flake-starter (main branch)
+nix-shell -p python312Packages.west --run "west init -m https://github.com/PleahMaCaka/zephyr-flake-starter --mr main zephyr-workspace"
 # update Zephyr modules
-cd my-workspace/zephyr-flake-starter
+cd zephyr-workspace/zephyr-flake-starter
 # enter the dev shell
 nix develop
 # update Zephyr modules
@@ -74,10 +74,32 @@ west update
 The structure will be:
 
 ```
-./<my-workspace>
+./<zephyr-workspace>
   ./.west
   ./zephyr-flake-starter
+  ./zephyr
+  ./<...etc>
 ```
+
+If you initialized this template and made your own repository with this template, you can do the following:
+
+```shell
+nix-shell -p python312Packages.west --run \
+    "west init -m https://github.com/<your_name>/<your_repository> --mr main zephyr-workspace"
+```
+
+Then, result will be:
+
+```
+./<zephyr-workspace>
+  ./.west
+  ./zephyr-flake-starter
+  ./<your_repository>
+  ./zephyr
+  ./<...etc>
+```
+
+After that, `west update` will be faster and you won't need multiple Zephyr kernel clones.
 
 ### Building and running
 
@@ -117,8 +139,8 @@ west twister -T tests --integration
 
 ### UART Debugging
 
-This flake is included tio. You can run the following command to start a UART debugging session:
-It will be run 115200 by default. To change the baud rate, use the `-b` flag.
+This flake includes tio. You can run the following command to start a UART debugging session:
+It will run at 115200 baud by default. To change the baud rate, use the `-b` flag.
 
 ```shell
 tio /dev/ttyUSB0
