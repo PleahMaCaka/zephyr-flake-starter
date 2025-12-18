@@ -56,15 +56,16 @@ environment. Follow the official
 
 ### Initialization
 
-The first step is to initialize the workspace folder (``my-workspace``) where
-the ``example-application`` and all Zephyr modules will be cloned. Run the following
+The first step is to initialize the workspace folder (`my-workspace`) where
+the `example-application` and all Zephyr modules will be cloned. Run the following
 command:
 
 ```shell
 # initialize my-workspace for the example-application (main branch)
-west init -m https://github.com/PleahMaCaka/zephyr-flake-starter --mr main my-workspace
+nix-shell -p python312Packages.west --run "west init -m https://github.com/PleahMaCaka/zephyr-flake-starter --mr main my-workspace"
 # update Zephyr modules
-cd my-workspace
+cd my-workspace/zephyr-flake-starter
+nix develop
 west update
 ```
 
@@ -104,10 +105,19 @@ To execute Twister integration tests, run the following command:
 west twister -T tests --integration
 ```
 
+### UART Debugging
+
+This flake is included tio. You can run the following command to start a UART debugging session:
+It will be run 115200 by default. To change the baud rate, use the `-b` flag.
+
+```shell
+tio /dev/ttyUSB0
+```
+
 ### Documentation
 
 A minimal documentation setup is provided for Doxygen and Sphinx. To build the
-documentation first change to the ``doc`` folder:
+documentation first change to the `doc` folder:
 
 ```shell
 cd doc
@@ -127,12 +137,12 @@ API documentation (Doxygen) can be built using the following command:
 doxygen
 ```
 
-The output will be stored in the ``_build_doxygen`` folder. Similarly, the
+The output will be stored in the `_build_doxygen` folder. Similarly, the
 Sphinx documentation (HTML) can be built using the following command:
 
 ```shell
 make html
 ```
 
-The output will be stored in the ``_build_sphinx`` folder. You may check for
-other output formats other than HTML by running ``make help``.
+The output will be stored in the `_build_sphinx` folder. You may check for
+other output formats other than HTML by running `make help`.
