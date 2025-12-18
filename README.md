@@ -65,8 +65,18 @@ command:
 nix-shell -p python312Packages.west --run "west init -m https://github.com/PleahMaCaka/zephyr-flake-starter --mr main my-workspace"
 # update Zephyr modules
 cd my-workspace/zephyr-flake-starter
+# enter the dev shell
 nix develop
+# update Zephyr modules
 west update
+```
+
+The structure will be:
+
+```
+./<my-workspace>
+  ./.west
+  ./zephyr-flake-starter
 ```
 
 ### Building and running
