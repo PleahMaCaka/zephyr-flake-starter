@@ -13,8 +13,9 @@
 
 __pycache__/
 
-# clangd cache
+# clangd
 .cache
+__cmake_systeminformation
 
 # docs
 /doc/_build*
