@@ -1,0 +1,6 @@
+CompileFlags:
+  CompilationDatabase: "./build"
+  Add: -Wno-unknown-warning-option
+  Remove: [-m*, -f*]
+Diagnostics:
+  Suppress: ["pp_hash_error", "redefinition_different_typedef"]

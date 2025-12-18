@@ -81,11 +81,13 @@ The structure will be:
   ./<...etc>
 ```
 
-If you initialized this template and made your own repository with this template, you can do the following:
+If you initialized this template and made your own repository with this template, you can just clone it in workspace directory:
 
 ```shell
-nix-shell -p python312Packages.west --run \
-    "west init -m https://github.com/<your_name>/<your_repository> --mr main zephyr-workspace"
+cd zephyr-workspace
+git clone https://github.com/<your_name>/<your_repository>
+cd <your_repository>
+west update
 ```
 
 Then, result will be:
